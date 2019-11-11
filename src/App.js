@@ -6,8 +6,28 @@ class App extends Component {
   state = {
     minutes: 25
   }
+
   handleStartTimer () {
-    console.log('timer is starting')
+    const fiveMinutes = 60 * this.state.minutes
+    const display = document.querySelector('#time')
+    this.startTimer(fiveMinutes, display)
+  }
+
+  startTimer (duration, display) {
+    let timer = duration; let minutes; let seconds
+    setInterval(function () {
+      minutes = parseInt(timer / 60, 10)
+      seconds = parseInt(timer % 60, 10)
+
+      minutes = minutes < 10 ? '0' + minutes : minutes
+      seconds = seconds < 10 ? '0' + seconds : seconds
+
+      display.textContent = minutes + ':' + seconds
+
+      if (--timer < 0) {
+        timer = duration
+      }
+    }, 1000)
   }
 
   handlePauseTimer () {
@@ -19,48 +39,20 @@ class App extends Component {
   }
 
   componentDidMount () {
-    console.log('MOUNTED')
-    console.log(this.state.minutes)
-    function startTimer (duration, display) {
-      var timer = duration; var minutes; var seconds
-      setInterval(function () {
-        minutes = parseInt(timer / 60, 10)
-        seconds = parseInt(timer % 60, 10)
-
-        minutes = minutes < 10 ? '0' + minutes : minutes
-        seconds = seconds < 10 ? '0' + seconds : seconds
-
-        display.textContent = minutes + ':' + seconds
-
-        if (--timer < 0) {
-          timer = duration
-        }
-      }, 1000)
-    }
-
-    let minutes = this.state.minutes
-    window.onload = function () {
-     
-      var fiveMinutes = 60 * minutes
-      var display = document.querySelector('#time')
-      startTimer(fiveMinutes, display)
-    }
   }
 
   render () {
     return (
       <div className='App'>
-        <h1>testing testing</h1>
         <header className='App-header'>
-          <p>
-           Welcome to my awesome pomodoro timer! :D
-          </p>
-          <div>Focus on task for <span id='time'>25:00</span> minutes!</div>
-          <div>Time left = <span id='timer' /></div>
-          <button name='start' onClick={this.handleStartTimer} />
-          <button name='pause' onClick={this.handlePauseTimer} />
-          <button name='reset' onClick={this.handleStopTimer} />
+          <h1>Welcome to my awsome pomodoro time</h1>
         </header>
+        <div>
+        <div>Focus on task for <span id='time'>25:00</span> minutes!</div>
+          <button name='start' onClick={this.handleStartTimer.bind(this)}>Start</button>
+          <button name='pause' onClick={this.handlePauseTimer.bind(this)}>Pause</button>
+          <button name='reset' onClick={this.handleStopTimer.bind(this)}>Reset</button>
+        </div>
       </div>)
   }
 }
