@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import './App.css'
-import Timer from './components/Timer'
-class App extends Component {
+
+class Timer extends Component {
   constructor (props) {
     super(props)
     this.state = {
       breakLenght: 5,
       minute: 25,
       second: 0,
-      IntervalId: 0
+      IntervalId: 0,
+      pomodoroCounter: 0
     }
   }
 
@@ -57,12 +57,20 @@ class App extends Component {
   render () {
     return (
       <div className='App'>
-        <header className='App-header'>
-          <h1>Welcome to my awsome pomodoro time</h1>
-        </header>
-        <Timer />
+        <h2>Time for focus!</h2>
+        <h2>
+          <span>{this.state.minute}</span>
+          <span>:</span>
+          <span>{this.state.second === 0 ? '00' : this.state.second < 10 ? '0' + this.state.second : this.state.second}</span>
+        </h2>
+        <div className='timerButtons'>
+          <button onClick={this.handlePlay.bind(this)}>Start</button>
+          <button onClick={this.handleStop.bind(this)}>Stop</button>
+          <button onClick={this.handleReset.bind(this)}>Refresh</button>
+        </div>
+        {/* <div>You have completed {this.state.pomodoroCounter} pomodoro.</div> */}
       </div>)
   }
 }
 
-export default App
+export default Timer
