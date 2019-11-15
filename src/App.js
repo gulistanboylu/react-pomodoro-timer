@@ -43,11 +43,15 @@ class App extends Component {
   }
 
   handleStop () {
-
+    clearInterval(this.state.IntervalId)
   }
 
   handleReset () {
-
+    this.handleStop()
+    this.setState({
+      minute: 25,
+      second: 0
+    })
   }
 
   render () {
