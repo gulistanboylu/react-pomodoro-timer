@@ -4,11 +4,11 @@ class Timer extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      breakLenght: 5,
-      minute: 25,
+      minute: 1,
       second: 0,
       IntervalId: 0,
-      pomodoroCounter: 0
+      pomodoroCounter: 0,
+      workOrBreak: 'work'
     }
   }
 
@@ -23,6 +23,28 @@ class Timer extends Component {
   decreaseTimer () {
     switch (this.state.second) {
       case 0:
+        if (this.state.minute === 0) {
+          if (this.state.workOrBreak === 'work') {
+            this.setState({
+              workOrBreak: 'break'
+            })
+            this.setState({
+              minute: 5
+            })
+            this.setState((prevState) => {
+              return {
+                pomodoroCounter: prevState.pomodoroCounter + 1
+              }
+            })
+          } else {
+            this.setState({
+              workOrBreak: 'work'
+            })
+            this.setState({
+              minute: 1
+            })
+          }
+        }
         this.setState((prevState) => {
           return {
             minute: prevState.minute - 1
@@ -49,7 +71,7 @@ class Timer extends Component {
   handleReset () {
     this.handleStop()
     this.setState({
-      minute: 25,
+      minute: 1,
       second: 0
     })
   }
@@ -57,7 +79,10 @@ class Timer extends Component {
   render () {
     return (
       <div className='App'>
-        <h2>Time for focus!</h2>
+        {
+          (this.state.workOrBreak === 'work')
+            ? <h2>Time for focus!</h2> : <h2>Time for break!</h2>
+        }
         <h2>
           <span>{this.state.minute}</span>
           <span>:</span>
@@ -68,7 +93,7 @@ class Timer extends Component {
           <button onClick={this.handleStop.bind(this)}>Stop</button>
           <button onClick={this.handleReset.bind(this)}>Refresh</button>
         </div>
-        {/* <div>You have completed {this.state.pomodoroCounter} pomodoro.</div> */}
+        <div>You have completed {this.state.pomodoroCounter} pomodoro.</div>
       </div>)
   }
 }
