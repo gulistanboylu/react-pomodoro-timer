@@ -4,7 +4,7 @@ class Timer extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      minute: 1,
+      minute: 25,
       second: 0,
       IntervalId: 0,
       pomodoroCounter: 0,
@@ -26,11 +26,10 @@ class Timer extends Component {
         if (this.state.minute === 0) {
           if (this.state.workOrBreak === 'work') {
             this.setState({
-              workOrBreak: 'break'
-            })
-            this.setState({
+              workOrBreak: 'break',
               minute: 5
             })
+
             this.setState((prevState) => {
               return {
                 pomodoroCounter: prevState.pomodoroCounter + 1
@@ -38,10 +37,8 @@ class Timer extends Component {
             })
           } else {
             this.setState({
-              workOrBreak: 'work'
-            })
-            this.setState({
-              minute: 1
+              workOrBreak: 'work',
+              minute: 25
             })
           }
         }
@@ -71,7 +68,7 @@ class Timer extends Component {
   handleReset () {
     this.handleStop()
     this.setState({
-      minute: 1,
+      minute: 25,
       second: 0
     })
   }
