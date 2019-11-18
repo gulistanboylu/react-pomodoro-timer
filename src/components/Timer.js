@@ -76,21 +76,28 @@ class Timer extends Component {
   render () {
     return (
       <div className='App'>
-        {
-          (this.state.workOrBreak === 'work')
-            ? <h2>Time for focus!</h2> : <h2>Time for break!</h2>
-        }
-        <h2>
-          <span>{this.state.minute}</span>
-          <span>:</span>
-          <span>{this.state.second === 0 ? '00' : this.state.second < 10 ? '0' + this.state.second : this.state.second}</span>
-        </h2>
+        <div className='timer-wrapper'>
+          <div className='timer'>
+            <h1>
+              <span>{this.state.minute}</span>
+              <span>:</span>
+              <span>{this.state.second === 0 ? '00' : this.state.second < 10 ? '0' + this.state.second : this.state.second}</span>
+            </h1>
+
+            <div className='status-message'>
+              {
+                (this.state.workOrBreak === 'work')
+                  ? <h3>Time for focus!</h3> : <h3>Time for break!</h3>
+              }
+            </div>
+          </div>
+        </div>
         <div className='timerButtons'>
           <button onClick={this.handlePlay.bind(this)}>Start</button>
           <button onClick={this.handleStop.bind(this)}>Stop</button>
           <button onClick={this.handleReset.bind(this)}>Refresh</button>
         </div>
-        <div>You have completed {this.state.pomodoroCounter} pomodoro.</div>
+        <div className='pomodoro-count'>You have completed {this.state.pomodoroCounter} pomodoro.</div>
       </div>)
   }
 }
