@@ -93,11 +93,11 @@ class Timer extends Component {
           </div>
         </div>
         <div className='timerButtons'>
-          <button onClick={this.handlePlay.bind(this)}>Start</button>
-          <button onClick={this.handleStop.bind(this)}>Stop</button>
-          <button onClick={this.handleReset.bind(this)}>Refresh</button>
+          <button onClick={this.handlePlay.bind(this)}><img src='./tomato.png' />START</button>
+          <button onClick={this.handleStop.bind(this)}><img src='./break.png' />STOP</button>
+          <button onClick={this.handleReset.bind(this)}><img src='./reset.png' />RESET</button>
         </div>
-        <div className='pomodoro-count'>You have completed {this.state.pomodoroCounter} pomodoro.</div>
+        <div className='pomodoro-count'>You have completed <span className='number'>{this.state.pomodoroCounter} </span>pomodoro.</div>
       </div>)
   }
 }
