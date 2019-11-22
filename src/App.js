@@ -57,8 +57,8 @@ class App extends Component {
   render () {
     return (
       <div className='App'>
-        <header className='App-header'>
-          <h1>Welcome to my awsome pomodoro time</h1>
+        <header className='app-header'>
+          <h2>Pomodoro Timer</h2>
         </header>
         <Timer />
       </div>)
