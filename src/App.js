@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
 import Timer from './components/Timer'
+import Sound from './components/Audio'
 class App extends Component {
   constructor (props) {
     super(props)
@@ -61,6 +62,7 @@ class App extends Component {
           <h2>Pomodoro Timer</h2>
         </header>
         <Timer />
+        <Sound />
       </div>)
   }
 }
